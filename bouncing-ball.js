@@ -1,67 +1,145 @@
-// Multiple Bouncing Balls Sketch - using p5.js instance mode
+// Animated Mondrian/Le Corbusier-style Grid - Windows Slide Out (with pause, slower speed, and looping)
 var sketch2 = function(p) {
-  // Ball class to manage multiple balls
-  class Ball {
-    constructor(x, y, radius, color, speedX, speedY) {
-      this.x = x;
-      this.y = y;
-      this.radius = radius;
-      this.color = color;
-      this.dx = speedX;
-      this.dy = speedY;
-    }
+  var canvasWidth = 800;
+  var canvasHeight = 400;
+  var palette = ['#1A53C0', '#d63230', '#f5d547', '#0D274B', '#ffffff'];
+  var rects = [];
+  var minW = 40, minH = 40;
+  var maxDepth = 4;
+  var baseSpeed = 4;
+  var slideSpeed = baseSpeed / 5; // 5 times slower
+  var startTime = null;
+  var sliding = false;
 
-    update() {
-      // Update ball position
-      this.x += this.dx;
-      this.y += this.dy;
-
-      // Bounce off the edges
-      if (this.x - this.radius < 0 || this.x + this.radius > p.width) {
-        this.dx *= -1;
-        // Keep ball within bounds
-        this.x = p.constrain(this.x, this.radius, p.width - this.radius);
+  function resetGrid() {
+    rects = [];
+    // Divide the grid vertically in half
+    let gridW = canvasWidth * 0.9;
+    let gridH = canvasHeight * 0.9;
+    let gridX = canvasWidth / 2;
+    let gridY = canvasHeight / 2;
+    // Left half (favor squares)
+    subdivideSquarish(gridX - gridW/4, gridY, gridW/2, gridH, 0);
+    // Right half (favor rectangles)
+    subdivideRectangular(gridX + gridW/4, gridY, gridW/2, gridH, 0);
+    // For each rect, determine slide direction and set velocity
+    for (let r of rects) {
+      let leftDist = r.x - r.w/2;
+      let rightDist = canvasWidth - (r.x + r.w/2);
+      let topDist = r.y - r.h/2;
+      let bottomDist = canvasHeight - (r.y + r.h/2);
+      let minDist = Math.min(leftDist, rightDist, topDist, bottomDist);
+      if (minDist === leftDist) {
+        r.vx = -slideSpeed; r.vy = 0;
+      } else if (minDist === rightDist) {
+        r.vx = slideSpeed; r.vy = 0;
+      } else if (minDist === topDist) {
+        r.vx = 0; r.vy = -slideSpeed;
+      } else {
+        r.vx = 0; r.vy = slideSpeed;
       }
-      if (this.y - this.radius < 0 || this.y + this.radius > p.height) {
-        this.dy *= -1;
-        // Keep ball within bounds
-        this.y = p.constrain(this.y, this.radius, p.height - this.radius);
-      }
+      r.active = true;
     }
-
-    draw() {
-      p.fill(this.color);
-      p.noStroke();
-      p.ellipse(this.x, this.y, this.radius * 2);
-    }
+    startTime = p.millis();
+    sliding = false;
   }
 
-  // Array to store all balls
-  var balls = [];
-
   p.setup = function() {
-    // Create the canvas and attach it to the container
-    var canvas = p.createCanvas(800, 400);
+    var canvas = p.createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvas-container-2');
-
-    // Create 4 balls with different properties
-    balls.push(new Ball(100, 100, 25, p.color(255, 100, 100), 3, 2));    // Red ball - small
-    balls.push(new Ball(200, 200, 40, p.color(100, 180, 255), 4, 3));    // Blue ball - medium
-    balls.push(new Ball(300, 150, 15, p.color(255, 220, 80), 5, 4));     // Yellow ball - tiny
-    balls.push(new Ball(400, 300, 50, p.color(180, 100, 255), 2, 5));    // Purple ball - large
+    resetGrid();
   };
 
   p.draw = function() {
-    // Clear the background
-    p.background(240);
-
-    // Update and draw all balls
-    for (var i = 0; i < balls.length; i++) {
-      balls[i].update();
-      balls[i].draw();
+    if (startTime === null) {
+      startTime = p.millis();
+    }
+    var elapsed = p.millis() - startTime;
+    p.background(0);
+    p.stroke(0);
+    p.strokeWeight(3);
+    p.rectMode(p.CENTER);
+    let anyActive = false;
+    if (elapsed < 3000) {
+      // Draw all rects static for 3 seconds
+      for (let r of rects) {
+        p.fill(r.color);
+        p.rect(r.x, r.y, r.w, r.h);
+      }
+    } else {
+      // Start sliding after 3 seconds
+      sliding = true;
+      for (let r of rects) {
+        if (r.active) {
+          r.x += r.vx;
+          r.y += r.vy;
+          // Check if rect is completely outside canvas
+          if (
+            r.x + r.w/2 < 0 ||
+            r.x - r.w/2 > canvasWidth ||
+            r.y + r.h/2 < 0 ||
+            r.y - r.h/2 > canvasHeight
+          ) {
+            r.active = false;
+          } else {
+            anyActive = true;
+          }
+        }
+        if (r.active) {
+          p.fill(r.color);
+          p.rect(r.x, r.y, r.w, r.h);
+        }
+      }
+      // If all are gone, reset for looping
+      if (!anyActive) {
+        resetGrid();
+      }
     }
   };
+
+  // Subdivide to favor squares (width ≈ height)
+  function subdivideSquarish(x, y, w, h, depth) {
+    if (w < minW || h < minH || depth >= maxDepth) {
+      rects.push({ x, y, w, h, color: p.random(palette) });
+      return;
+    }
+    if (p.random() < 0.5) {
+      let split = p.random(0.4, 0.6) * w;
+      let w1 = split;
+      let w2 = w - split;
+      subdivideSquarish(x - (w/2) + (w1/2), y, w1, h, depth + 1);
+      subdivideSquarish(x + (w/2) - (w2/2), y, w2, h, depth + 1);
+    } else {
+      let split = p.random(0.4, 0.6) * h;
+      let h1 = split;
+      let h2 = h - split;
+      subdivideSquarish(x, y - (h/2) + (h1/2), w, h1, depth + 1);
+      subdivideSquarish(x, y + (h/2) - (h2/2), w, h2, depth + 1);
+    }
+  }
+
+  // Subdivide to favor rectangles (width ≠ height)
+  function subdivideRectangular(x, y, w, h, depth) {
+    if (w < minW || h < minH || depth >= maxDepth) {
+      rects.push({ x, y, w, h, color: p.random(palette) });
+      return;
+    }
+    if (p.random() < 0.5) {
+      let split = p.random(0.2, 0.35) * w;
+      if (p.random() < 0.5) split = w - split;
+      let w1 = split;
+      let w2 = w - split;
+      subdivideRectangular(x - (w/2) + (w1/2), y, w1, h, depth + 1);
+      subdivideRectangular(x + (w/2) - (w2/2), y, w2, h, depth + 1);
+    } else {
+      let split = p.random(0.2, 0.35) * h;
+      if (p.random() < 0.5) split = h - split;
+      let h1 = split;
+      let h2 = h - split;
+      subdivideRectangular(x, y - (h/2) + (h1/2), w, h1, depth + 1);
+      subdivideRectangular(x, y + (h/2) - (h2/2), w, h2, depth + 1);
+    }
+  }
 };
 
-// Create the instance
 var myp5_2 = new p5(sketch2, 'canvas-container-2'); 
