@@ -79,5 +79,53 @@
   <!-- Load Three.js and 3D Canvas Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="threejs-3d-primitive.js"></script>
+  <script>
+    // Cursor toggle for all canvas sections
+    (function() {
+      const sections = [
+        { id: 'home', class: 'autocad-cursor', key: 'h' },
+        { id: 'drawing', class: 'a-cursor', key: 'a' },
+        { id: 'animation', class: 'b-cursor', key: 'b' },
+        { id: 'interactive', class: 'c-cursor', key: 'c' },
+        { id: 'threejs', class: 'd-cursor', key: 'd' }
+      ];
+      
+      const body = document.body;
+      const observers = [];
+      
+      sections.forEach(({ id, class: cursorClass }) => {
+        const section = document.getElementById(id);
+        const observer = new window.IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
+              // Remove all cursor classes first
+              body.classList.remove('autocad-cursor', 'a-cursor', 'b-cursor', 'c-cursor', 'd-cursor');
+              // Add the current cursor class
+              body.classList.add(cursorClass);
+            }
+          },
+          {
+            threshold: [0.95]
+          }
+        );
+        observer.observe(section);
+        observers.push(observer);
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', function(event) {
+        const key = event.key.toLowerCase();
+        const targetSection = sections.find(section => section.key === key);
+        
+        if (targetSection) {
+          event.preventDefault();
+          const section = document.getElementById(targetSection.id);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
