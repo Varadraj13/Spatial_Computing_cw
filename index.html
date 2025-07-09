@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P5.js Interactive Gallery</title>
+  
+  <!-- Load p5.js library from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <i class="fas fa-code"></i>
+        <span>P5.js Gallery</span>
+      </div>
+      
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#home" class="nav-link active">Home</a>
+        </li>
+        <li class="nav-item">
+          <a href="#drawing" class="nav-link">2D Drawing</a>
+        </li>
+        <li class="nav-item">
+          <a href="#animation" class="nav-link">Animation</a>
+        </li>
+        <li class="nav-item">
+          <a href="#interactive" class="nav-link">Interactive</a>
+        </li>
+        <li class="nav-item">
+          <a href="#about" class="nav-link">About</a>
+        </li>
+      </ul>
+      
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">Interactive P5.js Gallery</h1>
+      <p class="hero-subtitle">Exploring creative coding with modern web design</p>
+      <div class="hero-buttons">
+        <a href="#drawing" class="btn btn-primary">Start Exploring</a>
+        <a href="#about" class="btn btn-secondary">Learn More</a>
+      </div>
+    </div>
+    <div class="hero-background">
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- 2D Drawing Section -->
+    <section id="drawing" class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-paint-brush"></i>
+          2D Drawing with Primitives
+        </h2>
+        <p class="section-description">
+          Explore basic geometric shapes and primitives in a clean, grid-based environment. 
+          This canvas demonstrates fundamental drawing techniques using rectangles, ellipses, lines, and triangles.
+        </p>
+      </div>
+      
+      <div class="canvas-wrapper">
+        <div id="canvas-container-1" class="canvas-container"></div>
+        <div class="canvas-info">
+          <h3>Features</h3>
+          <ul>
+            <li>Grid-based layout</li>
+            <li>Multiple geometric shapes</li>
+            <li>Color variations</li>
+            <li>Clean visual design</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Animation Section -->
+    <section id="animation" class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-play-circle"></i>
+          Bouncing Ball Animation
+        </h2>
+        <p class="section-description">
+          Watch as a dynamic ball bounces around the canvas, demonstrating physics-based animation 
+          and smooth motion principles in real-time.
+        </p>
+      </div>
+      
+      <div class="canvas-wrapper">
+        <div id="canvas-container-2" class="canvas-container"></div>
+        <div class="canvas-info">
+          <h3>Features</h3>
+          <ul>
+            <li>Physics-based movement</li>
+            <li>Boundary collision detection</li>
+            <li>Smooth animation</li>
+            <li>Real-time updates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Section -->
+    <section id="interactive" class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-hand-pointer"></i>
+          Interactive Grid with Zoom & Pan
+        </h2>
+        <p class="section-description">
+          Interact with this canvas using your mouse and scroll wheel. Zoom in and out, 
+          pan around, and explore the spatial relationships between objects.
+        </p>
+      </div>
+      
+      <div class="canvas-wrapper">
+        <div id="canvas-container-3" class="canvas-container"></div>
+        <div class="canvas-info">
+          <h3>Controls</h3>
+          <ul>
+            <li><i class="fas fa-mouse"></i> Click and drag to pan</li>
+            <li><i class="fas fa-search-plus"></i> Scroll to zoom in/out</li>
+            <li><i class="fas fa-arrows-alt"></i> Explore spatial relationships</li>
+            <li><i class="fas fa-eye"></i> Dynamic perspective</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="section-header">
+        <h2 class="section-title">
+          <i class="fas fa-info-circle"></i>
+          About This Project
+        </h2>
+      </div>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            This interactive gallery showcases the power of P5.js for creative coding and digital art. 
+            Each canvas demonstrates different aspects of computational design, from basic geometric 
+            primitives to complex interactive systems.
+          </p>
+          <p>
+            Built with modern web technologies and designed for an optimal user experience, 
+            this project explores the intersection of art, technology, and human interaction.
+          </p>
+        </div>
+        
+        <div class="tech-stack">
+          <h3>Technologies Used</h3>
+          <div class="tech-items">
+            <div class="tech-item">
+              <i class="fab fa-js"></i>
+              <span>P5.js</span>
+            </div>
+            <div class="tech-item">
+              <i class="fab fa-html5"></i>
+              <span>HTML5</span>
+            </div>
+            <div class="tech-item">
+              <i class="fab fa-css3-alt"></i>
+              <span>CSS3</span>
+            </div>
+            <div class="tech-item">
+              <i class="fab fa-js"></i>
+              <span>JavaScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>P5.js Interactive Gallery</h3>
+        <p>Exploring creative coding and digital art</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#drawing">2D Drawing</a></li>
+          <li><a href="#animation">Animation</a></li>
+          <li><a href="#interactive">Interactive</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Connect</h4>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 P5.js Gallery. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Load P5.js Scripts -->
+  <script src="2d-drawing.js"></script>
+  <script src="bouncing-ball.js"></script>
+  <script src="zoom-pan.js"></script>
+  
+  <!-- Navigation Script -->
+  <script>
+    // Mobile menu toggle
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      navMenu.classList.toggle('active');
+    });
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Active navigation highlighting
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollY >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
