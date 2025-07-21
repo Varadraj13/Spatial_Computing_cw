@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exploring Spatial Design</title>
+  <title>Computational Design Workflows</title>
   
   <!-- Load p5.js library from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
@@ -21,16 +21,20 @@
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-content">
-      <h1 class="hero-title">Exploring Spatial Design</h1>
+      <h1 class="hero-title">Computational Design Workflows</h1>
+      <nav class="hero-nav">
+        <ul>
+          <li><a href="#drawing">2D Drawing</a></li>
+          <li><a href="#animation">Animation</a></li>
+          <li><a href="#interactive">Interactive</a></li>
+          <li><a href="#threejs">3D Canvas</a></li>
+          <li><a href="#relational-structures">Relational Structures</a></li>
+          <li><a href="#F">Geospatial Structures</a></li>
+        </ul>
+      </nav>
     </div>
   </section>
 
-  <!-- Divider Line -->
-  <div class="divider-line"></div>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    
     <!-- 2D Drawing Section -->
     <section id="drawing" class="section">
       <div class="canvas-wrapper">
@@ -63,7 +67,24 @@
         <div id="threejs-canvas-main" class="canvas-container"></div>
       </div>
     </section>
-  </main>
+
+    <!-- Relational Structures Section -->
+    <section id="relational-structures" class="section">
+        <div class="canvas-wrapper">
+            <div id="canvas-container-4" class="canvas-container">
+                <div id="force-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Geospatial Structures Section (F) -->
+    <section id="F" class="section">
+        <div class="canvas-wrapper">
+            <div id="canvas-container-5" class="canvas-container">
+                <div id="mapbox-canvas" style="width: 1600px; height: 800px; border-radius: 8px; overflow: hidden;"></div>
+            </div>
+        </div>
+    </section>
 
   <!-- Signature -->
   <div class="signature">
@@ -79,6 +100,60 @@
   <!-- Load Three.js and 3D Canvas Script -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="threejs-3d-primitive.js"></script>
+  <!-- Load D3.js and Force Diagram Script -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <script>
+    window.safetyData = {
+      name: "Urban Safety Parameters",
+      children: [
+        { name: "Natural Lighting", priority: "High", children: [
+          { name: "Sun Path Analysis" },
+          { name: "Building Obstructions" },
+          { name: "Radiation Mapping" }
+        ]},
+        { name: "Artificial Lighting", priority: "High", children: [
+          { name: "Point Lights" },
+          { name: "Light Radius Falloff" },
+          { name: "Coverage Grids" }
+        ]},
+        { name: "Enclosure / Tightness", priority: "High", children: [
+          { name: "Width-to-Height Ratio" },
+          { name: "Distance Between Walls" },
+          { name: "Segment Analysis" }
+        ]},
+        { name: "Tunnel Effect", priority: "Medium", children: [
+          { name: "Aspect Ratio Detection" },
+          { name: "Narrow Elongated Shapes" }
+        ]},
+        { name: "Visibility / Sightlines", priority: "High", children: [
+          { name: "Isovist Mapping" },
+          { name: "View Analysis" },
+          { name: "Line-of-Sight Obstruction" }
+        ]},
+        { name: "Escape Route Clarity", priority: "High", children: [
+          { name: "Shortest Path to Exit" },
+          { name: "Multiple Routes" },
+          { name: "Network Graph Mapping" }
+        ]},
+        { name: "Public vs Private Zones", priority: "Medium", children: [
+          { name: "Zoning Boundaries" },
+          { name: "Accessibility Tags" },
+          { name: "Transition Gradients" }
+        ]},
+        { name: "Weather Exposure", priority: "Low", children: [
+          { name: "Shelter Surfaces" },
+          { name: "Raycast Intersections" },
+          { name: "Rain/Sun Coverage" }
+        ]},
+        { name: "Noise / Crowd Density", priority: "Low", children: [
+          { name: "Noise Sources" },
+          { name: "Intensity Falloff" },
+          { name: "Crowd Flow Simulation" }
+        ]}
+      ]
+    };
+  </script>
+  <script src="force-diagram.js"></script>
   <script>
     // Cursor toggle for all canvas sections
     (function() {
@@ -87,7 +162,9 @@
         { id: 'drawing', class: 'a-cursor', key: 'a' },
         { id: 'animation', class: 'b-cursor', key: 'b' },
         { id: 'interactive', class: 'c-cursor', key: 'c' },
-        { id: 'threejs', class: 'd-cursor', key: 'd' }
+        { id: 'threejs', class: 'd-cursor', key: 'd' },
+        { id: 'relational-structures', class: 'relational-cursor', key: 'r' },
+        { id: 'F', class: 'f-cursor', key: 'f' }
       ];
       
       const body = document.body;
@@ -99,7 +176,8 @@
           ([entry]) => {
             if (entry.isIntersecting && entry.intersectionRatio >= 0.95) {
               // Remove all cursor classes first
-              body.classList.remove('autocad-cursor', 'a-cursor', 'b-cursor', 'c-cursor', 'd-cursor');
+              body.classList.remove('autocad-cursor', 'a-cursor', 'b-cursor', 'c-cursor', 'd-cursor', 'relational-cursor');
+              body.classList.remove('f-cursor');
               // Add the current cursor class
               body.classList.add(cursorClass);
             }
@@ -127,5 +205,23 @@
       });
     })();
   </script>
+
+  <!-- Mapbox GL JS for Geospatial Structures Section -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      if (document.getElementById('mapbox-canvas')) {
+        mapboxgl.accessToken = 'pk.eyJ1IjoidmFyYWRyYWotMTMiLCJhIjoiY21kNmtzcXQ5MDE3ajJqcHNxaWsydDN3ZiJ9.5HCGlqdCISO4bl2YY3q-6A';
+        const map = new mapboxgl.Map({
+          container: 'mapbox-canvas',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [35.5018, 33.8938], // Beirut
+          zoom: 11
+        });
+      }
+    });
+  </script>
+
 </body>
 </html>
