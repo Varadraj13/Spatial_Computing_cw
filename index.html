@@ -215,9 +215,64 @@
         mapboxgl.accessToken = 'pk.eyJ1IjoidmFyYWRyYWotMTMiLCJhIjoiY21kNmtzcXQ5MDE3ajJqcHNxaWsydDN3ZiJ9.5HCGlqdCISO4bl2YY3q-6A';
         const map = new mapboxgl.Map({
           container: 'mapbox-canvas',
-          style: 'mapbox://styles/mapbox/streets-v11',
-          center: [35.5018, 33.8938], // Beirut
-          zoom: 11
+          style: 'mapbox://styles/mapbox/light-v10',
+          center: [35.515, 33.89], // Beirut
+          zoom: 12.2,
+          maxBounds: [
+            [35.45, 33.84], // Southwest
+            [35.60, 33.94]  // Northeast
+          ]
+        });
+        map.addControl(new mapboxgl.NavigationControl({ showCompass: true, showZoom: true }), 'top-right');
+        map.on('load', function() {
+          fetch('beirut_explosion_corrected.geojson')
+            .then(response => response.json())
+            .then(data => {
+              map.addSource('beirut-real-sites', {
+                type: 'geojson',
+                data: data
+              });
+              map.addLayer({
+                id: 'beirut-real-sites-circles',
+                type: 'circle',
+                source: 'beirut-real-sites',
+                paint: {
+                  'circle-radius': 10,
+                  'circle-color': [
+                    'match',
+                    ['get', 'severity'],
+                    'High', '#f87171',
+                    'Medium', '#fbbf24',
+                    'Low', '#fde047',
+                    '#888'
+                  ],
+                  'circle-stroke-width': 2,
+                  'circle-stroke-color': '#fff',
+                  'circle-opacity': 0.9
+                }
+              });
+              let hoverPopup;
+              map.on('mouseenter', 'beirut-real-sites-circles', function(e) {
+                map.getCanvas().style.cursor = 'pointer';
+                const coords = e.features[0].geometry.coordinates;
+                const props = e.features[0].properties;
+                hoverPopup = new mapboxgl.Popup({ closeButton: false, closeOnClick: false })
+                  .setLngLat(coords)
+                  .setHTML(`
+                    <div style='font-size:13px; color: #000;'>
+                      <strong>${props.location}</strong><br/>
+                      Severity: ${props.severity}<br/>
+                      <span>${props.description}</span><br/>
+                      <span style='font-size:12px;'>[${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}]</span>
+                    </div>
+                  `)
+                  .addTo(map);
+              });
+              map.on('mouseleave', 'beirut-real-sites-circles', function() {
+                map.getCanvas().style.cursor = '';
+                if (hoverPopup) hoverPopup.remove();
+              });
+            });
         });
       }
     });

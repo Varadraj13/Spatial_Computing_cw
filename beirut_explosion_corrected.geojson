@@ -1,0 +1,380 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Warehouse 12 (Epicenter)",
+        "severity": "High",
+        "description": "Main explosion site storing 2,750\u202ft of ammonium nitrate."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3445,
+          33.875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Beirut Grain Silos",
+        "severity": "High",
+        "description": "Partially collapsed in subsequent fires post-blast."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3448,
+          33.8753
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "St George Hospital",
+        "severity": "High",
+        "description": "Glass shattered, staff injured, operations disrupted."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.336,
+          33.881
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "RAI Hospital",
+        "severity": "High",
+        "description": "Operations suspended; significant internal damage."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3355,
+          33.8793
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "LAU Medical Center",
+        "severity": "Medium",
+        "description": "Nearby windows damaged; operational stress."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.502,
+          33.892
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Makassed General Hospital",
+        "severity": "Medium",
+        "description": "Reported broken glass and partial outages."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5233,
+          33.8861
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Sursock Museum",
+        "severity": "Medium",
+        "description": "Stained-glass shattered, artworks destroyed."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5028,
+          33.9033
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Gemmayzeh Cultural District",
+        "severity": "Medium",
+        "description": "Heritage buildings and caf\u00e9s severely impacted."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5015,
+          33.8931
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Armenian Catholicosate",
+        "severity": "Medium",
+        "description": "Facade and interior damage."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5065,
+          33.886
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Greek Orthodox Archdiocese",
+        "severity": "Medium",
+        "description": "Interior artifacts destroyed by shockwave."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5101,
+          33.8915
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Saint George Maronite Cathedral",
+        "severity": "Medium",
+        "description": "Iconic church dome cracked; glass shattered."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5132,
+          33.8954
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "American University of Beirut (AUB) Museum",
+        "severity": "Medium",
+        "description": "Doors blown off, collections at risk."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.495,
+          33.911
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Universit\u00e9 Saint-Joseph",
+        "severity": "Medium",
+        "description": "Reported classroom and structural damage."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5185,
+          33.8855
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "International College (IC)",
+        "severity": "Medium",
+        "description": "Historic school campus suffered glass damage."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.4957,
+          33.8971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Argentinian Embassy",
+        "severity": "Medium",
+        "description": "Windows and facade damaged."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3315,
+          33.8842
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Australian Embassy",
+        "severity": "Medium",
+        "description": "Embassy building affected."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3322,
+          33.8846
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "German Embassy",
+        "severity": "Medium",
+        "description": "Building evacuated after explosion impact."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5198,
+          33.9021
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "FIBA Asia Headquarters",
+        "severity": "Medium",
+        "description": "Structural and facade damage."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.345,
+          33.882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Electricit\u00e9 du Liban",
+        "severity": "Medium",
+        "description": "National grid building damaged."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5141,
+          33.8978
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "ABC Achrafieh Mall",
+        "severity": "Medium",
+        "description": "Shopping complex glass shattered."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5193,
+          33.8888
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Karantina District",
+        "severity": "High",
+        "description": "Low-income neighborhood severely impacted."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.356,
+          33.8891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Mar Mikhael",
+        "severity": "High",
+        "description": "Trendy residential and bar area destroyed."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5069,
+          33.891
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Bourj Hammoud",
+        "severity": "Medium",
+        "description": "Armenian district with moderate shockwave damage."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5363,
+          33.8883
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Port of Beirut - Container Terminal",
+        "severity": "High",
+        "description": "Shipping infrastructure destroyed."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.3515,
+          33.8801
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "location": "Lebanese Red Cross HQ",
+        "severity": "Medium",
+        "description": "Responded to emergency within 15 min; HQ also impacted."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          35.5202,
+          33.8924
+        ]
+      }
+    }
+  ]
+}
